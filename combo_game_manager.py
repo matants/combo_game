@@ -1,3 +1,4 @@
+#!python
 import datetime
 import os
 from typing import Optional, List
@@ -60,13 +61,16 @@ class ComboGameManager:
 
 
 if __name__ == '__main__':
-    names_list_str = input('אנא הכנס שמות הפסגותניקים שהגיעו היום והפרד בפסיקים:')
-    names_list = [name for name in [name.strip() for name in names_list_str.split(',')] if name != '']
-    game_manager = ComboGameManager()
-    for name in names_list:
-        game_manager.increase_player_combo(name)
-    no_shows = game_manager.find_players_to_remove_scores_from()
-    for name in no_shows:
-        game_manager.reduce_player_combo(name)
-    game_manager.final_format_table()
-    game_manager.export_table()
+    names_list_str = input('אנא הכנס שמות הפסגותניקים שהגיעו היום והפרד בפסיקים:\n')
+    if names_list_str == '':
+        print('got no input, ignoring')
+    else:
+        names_list = [name for name in [name.strip() for name in names_list_str.split(',')] if name != '']
+        game_manager = ComboGameManager()
+        for name in names_list:
+            game_manager.increase_player_combo(name)
+        no_shows = game_manager.find_players_to_remove_scores_from()
+        for name in no_shows:
+            game_manager.reduce_player_combo(name)
+        game_manager.final_format_table()
+        game_manager.export_table()
